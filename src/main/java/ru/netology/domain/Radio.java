@@ -2,9 +2,9 @@ package ru.netology.domain;
 
 public class Radio {
     private int currentStation;
+    private int middleStation;
     private int minStation = 0;
     private int maxStation = 9;
-    private int middleStation;
     private int currentVolume;
     private int minVolume = 0;
     private int maxVolume = 10;
@@ -29,7 +29,7 @@ public class Radio {
 
     public void increaseVolume() {
         if (currentVolume < 10) {
-            currentVolume = currentVolume +1;
+            currentVolume = currentVolume + 1;
         }
         if (currentVolume > 10) {
             return;
@@ -46,7 +46,7 @@ public class Radio {
     }
 
 
-    //Middle Station
+
     public int getMiddleStation() {
         return middleStation;
     }
@@ -58,64 +58,75 @@ public class Radio {
         this.middleStation = middleStation;
     }
 
-    //Current Station
+
     public int getCurrentStation() {
-        return currentStation; //позволяет получить данные о текущей станции от объекта Радио
+        return currentStation;
     }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation > maxStation) {
+        if (currentStation > maxStation && currentStation < minStation) {
             return;
         }
-        if (currentStation < minStation) {
-            return;
-        }
-        //this.currentStation = currentStation;
-
+        this.currentStation = currentStation;
     }
 
-    //Min
+
     public int getMinStation() {
         return minStation;
     }
 
     public void setMinStation(int minStation) {
+        if (minStation != 0) {
+            return;
+        }
         this.minStation = minStation;
     }
 
-    //Max
+
     public int getMaxStation() {
         return maxStation;
     }
 
     public void setMaxStation(int maxStation) {
+        if (maxStation != 9) {
+            return;
+        }
         this.maxStation = maxStation;
     }
 
-    //Current Volume
+
     public int getCurrentVolume() {
         return currentVolume;
     }
 
     public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > 10 && currentVolume < 0) {
+            return;
+        }
         this.currentVolume = currentVolume;
     }
 
-    //Min Volume
+
     public int getMinVolume() {
         return minVolume;
     }
 
     public void setMinVolume(int minVolume) {
+        if (minVolume < 0) {
+            return;
+        }
         this.minVolume = minVolume;
     }
 
-    //Max Volume
+
     public int getMaxVolume() {
         return maxVolume;
     }
 
     public void setMaxVolume(int maxVolume) {
+        if (maxVolume > 10) {
+            return;
+        }
         this.maxVolume = maxVolume;
     }
 }
