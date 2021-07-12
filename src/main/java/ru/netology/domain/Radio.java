@@ -12,10 +12,21 @@ public class Radio {
 
     public Radio() {}
 
-    public Radio(int stationsAmount, int currentVolume) {
-        this.stationsAmount = stationsAmount;
+    public Radio(int currentStation, int middleStation, int minStation, int maxStation, int currentVolume, int minVolume, int maxVolume, int stationsAmount) {
+        this.currentStation = currentStation;
+        this.middleStation = middleStation;
+        this.minStation = minStation;
+        this.maxStation = maxStation;
         this.currentVolume = currentVolume;
+        this.minVolume = minVolume;
+        this.maxVolume = maxVolume;
+        this.stationsAmount = stationsAmount;
     }
+
+    //    public Radio(int stationsAmount, int currentVolume) {
+//        this.stationsAmount = stationsAmount;
+//        this.currentVolume = currentVolume;
+//    }
 
     public int getStationsAmount() {
         return stationsAmount;
@@ -29,11 +40,12 @@ public class Radio {
         return middleStation;
     }
 
-    public void setMiddleStation(int middleStation) {
+    public int setMiddleStation(int middleStation) {
         if (middleStation != 5) {
-            return;
+            return middleStation;
         }
         this.middleStation = middleStation;
+        return middleStation;
     }
 
 
