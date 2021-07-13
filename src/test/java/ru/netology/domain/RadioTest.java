@@ -1,10 +1,8 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class RadioTest {
     Radio radio = new Radio(
@@ -12,21 +10,29 @@ class RadioTest {
             5,
             0,
             10,
-            15,
             0,
             100,
             10);
-
     @Test
     public void shouldUseAllArgsConstructor() {
+        assertEquals(10, radio.getCurrentStation());
+        assertEquals(5, radio.getMiddleStation());
+        assertEquals(0, radio.getMinStation());
+        assertEquals(10, radio.getMaxStation());
+        assertEquals(0, radio.getMinVolume());
+        assertEquals(100, radio.getMaxVolume());
         assertEquals(10, radio.getStationsAmount());
-        assertEquals(15, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldUseNoArgsConstructor() {
         Radio radio = new Radio();
-        assertEquals(15, radio.getCurrentVolume());
+        assertEquals(10, radio.getCurrentStation());
+        assertEquals(5, radio.getMiddleStation());
+        assertEquals(0, radio.getMinStation());
+        assertEquals(10, radio.getMaxStation());
+        assertEquals(0, radio.getMinVolume());
+        assertEquals(100, radio.getMaxVolume());
         assertEquals(10, radio.getStationsAmount());
     }
 
@@ -115,15 +121,15 @@ class RadioTest {
     @Test
     public void currentVolumeLowerThanAvailable() {
        radio.setCurrentVolume(-1);
-        assertEquals(15, radio.getCurrentVolume());
+        assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
     public void currentVolumeHigherThanAvailable() {
         radio.setCurrentVolume(101);
-        assertEquals(15, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
-//
+
     @Test
     public void minVolumeMustBeZero() { //минимальная громкость должна быть = 0
         radio.setMinVolume(1);
@@ -202,12 +208,26 @@ class RadioTest {
         assertEquals(100, radio.getCurrentVolume());
     }
 
+    @Test
+    public void increasingOverThanMaxVolume() {
+        radio.setCurrentVolume(100);
+        radio.increaseVolume();
+        assertEquals(100, radio.getCurrentVolume());
+    }
+
 
     @Test
     public void decreasingVolume() {
         radio.setCurrentVolume(51);
         radio.decreaseVolume();
         assertEquals(50, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void decreasingOverThanMinVolume() {
+        radio.setCurrentVolume(0);
+        radio.decreaseVolume();
+        assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
