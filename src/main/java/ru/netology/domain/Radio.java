@@ -7,7 +7,7 @@ public class Radio {
     private int currentVolume;
     private int minVolume = 0;
     private int maxVolume = 100;
-    private int stationsAmount = 10;
+    private int stationsAmount;
 
     public Radio() {
     }
@@ -17,7 +17,7 @@ public class Radio {
         this.currentVolume = currentVolume;
         this.minVolume = minVolume;
         this.maxVolume = maxVolume;
-        this.stationsAmount = stationsAmount;
+        this.stationsAmount = maxStation;
     }
 
     public int getStationsAmount() {
