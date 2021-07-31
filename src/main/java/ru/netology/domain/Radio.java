@@ -25,7 +25,7 @@ public class Radio {
     }
 
     public void setStationsAmount(int stationsAmount) {
-        this.stationsAmount = stationsAmount;
+        this.stationsAmount = maxStation;
     }
 
     public int getCurrentStation() {
