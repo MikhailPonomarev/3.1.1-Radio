@@ -18,10 +18,6 @@ public class Radio {
     private int maxVolume = 100;
     private int stationsAmount;
 
-    public void setStationsAmount(int stationsAmount) {
-        this.stationsAmount = maxStation;
-    }
-
     public void setCurrentStation(int currentStation) {
         if (currentStation > maxStation) {
             currentStation = minStation;
