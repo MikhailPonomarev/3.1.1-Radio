@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RadioTest {
-    Radio radio = new Radio(5, 64, 0, 100, 10);
+    Radio radio = new Radio(10);
 
     @Test
     public void shouldUseNoArgsConstructor() {
@@ -15,6 +15,13 @@ class RadioTest {
         assertEquals(0, radio.getMinVolume());
         assertEquals(100, radio.getMaxVolume());
         assertEquals(10, radio.getMaxStation());
+    }
+
+    @Test
+    public void stationsAmountMoreThanMax() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(15);
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
