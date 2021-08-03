@@ -1,44 +1,31 @@
 package ru.netology.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
 public class Radio {
-    private int currentStation;
-    private int middleStation;
+    private int currentStation = 10;
+    private int middleStation = 5;
     private int minStation = 0;
-    private int maxStation = 9;
+    private int maxStation = 10;
     private int currentVolume;
     private int minVolume = 0;
-    private int maxVolume = 10;
-
-
-    public int getMiddleStation() {
-        return middleStation;
-    }
-
-    public void setMiddleStation(int middleStation) {
-        if (middleStation != 4) {
-            return;
-        }
-        this.middleStation = middleStation;
-    }
-
-
-    public int getCurrentStation() {
-        return currentStation;
-    }
+    private int maxVolume = 100;
+    private int stationsAmount;
 
     public void setCurrentStation(int currentStation) {
         if (currentStation > maxStation) {
-            return;
+            currentStation = minStation;
         }
         if (currentStation < minStation) {
-            return;
+            currentStation = maxStation;
         }
         this.currentStation = currentStation;
-    }
-
-
-    public int getMinStation() {
-        return minStation;
     }
 
     public void setMinStation(int minStation) {
@@ -51,11 +38,6 @@ public class Radio {
         this.minStation = minStation;
     }
 
-
-    public int getMaxStation() {
-        return maxStation;
-    }
-
     public void setMaxStation(int maxStation) {
         if (this.maxStation > maxStation) {
             return;
@@ -66,24 +48,14 @@ public class Radio {
         this.maxStation = maxStation;
     }
 
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
     public void setCurrentVolume(int currentVolume) {
         if (currentVolume > maxVolume) {
-            return;
+            currentVolume = maxVolume;
         }
         if (currentVolume < minVolume) {
-            return;
+            currentVolume = minVolume;
         }
         this.currentVolume = currentVolume;
-    }
-
-
-    public int getMinVolume() {
-        return minVolume;
     }
 
     public void setMinVolume(int minVolume) {
@@ -91,11 +63,6 @@ public class Radio {
             return;
         }
         this.minVolume = minVolume;
-    }
-
-
-    public int getMaxVolume() {
-        return maxVolume;
     }
 
     public void setMaxVolume(int maxVolume) {
@@ -106,10 +73,10 @@ public class Radio {
     }
 
     public void nextStation() {
-        if (currentStation <= 9) {
+        if (currentStation <= 10) {
             currentStation = currentStation + 1;
         }
-        if (currentStation > 9) {
+        if (currentStation > 10) {
             currentStation = 0;
         }
     }
@@ -119,25 +86,19 @@ public class Radio {
             currentStation = currentStation - 1;
         }
         if (currentStation <= 0) {
-            currentStation = 9;
+            currentStation = 10;
         }
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
-        }
-        if (currentVolume > 10) {
-            currentVolume = 10;
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
-        }
-        if (currentVolume < 0) {
-            currentVolume = 0;
         }
     }
 }
