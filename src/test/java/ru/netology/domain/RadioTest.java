@@ -19,9 +19,9 @@ class RadioTest {
 
     @Test
     public void stationsAmountMoreThanMax() {
-        Radio radio = new Radio(20);
+        Radio radio = new Radio();
         radio.setCurrentStation(15);
-        assertEquals(0, radio.getCurrentStation());
+        assertEquals(15, radio.getCurrentStation());
     }
 
     @Test
@@ -32,13 +32,15 @@ class RadioTest {
 
     @Test
     public void currentStationLowerThanMin() {
-        radio.setCurrentStation(-1);
+        radio.setCurrentStation(0);
+        radio.prevStation();
         assertEquals(10, radio.getCurrentStation());
     }
 
     @Test
     public void currentStationHigherThanMax() {
-        radio.setCurrentStation(11);
+        radio.setCurrentStation(10);
+        radio.nextStation();
         assertEquals(0, radio.getCurrentStation());
     }
 
