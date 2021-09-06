@@ -19,7 +19,7 @@ class RadioTest {
 
     @Test
     public void stationsAmountMoreThanMax() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(20);
         radio.setCurrentStation(15);
         assertEquals(15, radio.getCurrentStation());
     }
