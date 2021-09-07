@@ -25,6 +25,13 @@ class RadioTest {
     }
 
     @Test
+    public void stationsAmountLessThanMin () {
+        Radio radio = new Radio(-10);
+        radio.setCurrentStation(-4);
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
     public void currentStationInInitialRange() {
         radio.setCurrentStation(6);
         assertEquals(6, radio.getCurrentStation());

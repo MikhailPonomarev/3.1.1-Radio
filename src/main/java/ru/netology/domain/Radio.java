@@ -13,15 +13,19 @@ public class Radio {
     }
 
     public Radio(int stationsAmount) {
-        this.stationsAmount = maxStation;
+        this.stationsAmount = stationsAmount;
     }
 
     public int getStationsAmount() {
         return stationsAmount;
     }
 
+
     public void setStationsAmount(int stationsAmount) {
-        this.stationsAmount = maxStation;
+        if (stationsAmount < minStation) {
+            return;
+        }
+        this.stationsAmount = stationsAmount;
     }
 
     public int getCurrentStation() {
@@ -29,6 +33,12 @@ public class Radio {
     }
 
     public void setCurrentStation(int currentStation) {
+        if (currentStation > stationsAmount) {
+            return;
+        }
+        if (currentStation < minStation) {
+            return;
+        }
         this.currentStation = currentStation;
     }
 
