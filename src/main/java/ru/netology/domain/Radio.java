@@ -3,17 +3,18 @@ package ru.netology.domain;
 public class Radio {
     private int currentStation;
     private int minStation = 0;
-    private int maxStation = 10;
     private int currentVolume;
     private int minVolume = 0;
     private int maxVolume = 100;
-    private int stationsAmount;
+    private int stationsAmount = 10;
 
     public Radio() {
     }
 
     public Radio(int stationsAmount) {
-        this.stationsAmount = stationsAmount;
+        if (stationsAmount > minStation) {
+            this.stationsAmount = stationsAmount - 1;
+        }
     }
 
     public int getStationsAmount() {
@@ -34,10 +35,10 @@ public class Radio {
 
     public void setCurrentStation(int currentStation) {
         if (currentStation > stationsAmount) {
-            return;
+            currentStation = minStation;
         }
         if (currentStation < minStation) {
-            return;
+            currentStation = stationsAmount;
         }
         this.currentStation = currentStation;
     }
@@ -56,22 +57,6 @@ public class Radio {
         }
         this.minStation = minStation;
     }
-
-
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public void setMaxStation(int maxStation) {
-        if (this.maxStation > maxStation) {
-            return;
-        }
-        if (this.maxStation < maxStation) {
-            return;
-        }
-        this.maxStation = maxStation;
-    }
-
 
     public int getCurrentVolume() {
         return currentVolume;
@@ -112,20 +97,26 @@ public class Radio {
     }
 
     public void nextStation() {
-        if (currentStation <= 10) {
-            currentStation = currentStation + 1;
+        if (currentStation >= stationsAmount) {
+            this.currentStation = minStation;
         }
-        if (currentStation > 10) {
-            currentStation = 0;
+        else if (currentStation == minStation) {
+            return;
+        }
+        else {
+            this.currentStation = currentStation + 1;
         }
     }
 
     public void prevStation() {
-        if (currentStation > 0) {
-            currentStation = currentStation - 1;
+        if (currentStation < minStation) {
+            this.currentStation = stationsAmount;
         }
-        if (currentStation <= 0) {
-            currentStation = 10;
+        else if (currentStation == minStation) {
+            this.currentStation = stationsAmount;
+        }
+        else {
+            this.currentStation = currentStation - 1;
         }
     }
 

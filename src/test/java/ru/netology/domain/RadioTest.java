@@ -14,21 +14,40 @@ class RadioTest {
         assertEquals(0, radio.getCurrentVolume());
         assertEquals(0, radio.getMinVolume());
         assertEquals(100, radio.getMaxVolume());
-        assertEquals(10, radio.getMaxStation());
     }
 
     @Test
-    public void stationsAmountMoreThanMax() {
+    public void shouldSetStationsAmount() {
         Radio radio = new Radio(20);
         radio.setCurrentStation(15);
         assertEquals(15, radio.getCurrentStation());
     }
 
     @Test
-    public void stationsAmountLessThanMin () {
+    public void setHigherStation() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(19);
+        assertEquals(19, radio.getCurrentStation());
+    }
+
+    @Test
+    public void setStationHigherThanMax() {
+        radio.setCurrentStation(20);
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void radioWithMinStations() {
+        Radio radio = new Radio(1);
+        radio.setCurrentStation(1);
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void stationsAmountLessThanMin() {
         Radio radio = new Radio(-10);
         radio.setCurrentStation(-4);
-        assertEquals(0, radio.getCurrentStation());
+        assertEquals(10, radio.getCurrentStation());
     }
 
     @Test
@@ -37,33 +56,19 @@ class RadioTest {
         assertEquals(6, radio.getCurrentStation());
     }
 
-    @Test
-    public void currentStationLowerThanMin() {
-        radio.setCurrentStation(0);
-        radio.prevStation();
-        assertEquals(10, radio.getCurrentStation());
-    }
-
-    @Test
-    public void currentStationHigherThanMax() {
-        radio.setCurrentStation(10);
-        radio.nextStation();
-        assertEquals(0, radio.getCurrentStation());
-    }
-
     //если текущая станция < минимальной, то должна переключиться на максимальную
     @Test
     public void ifCurrentStationLower() {
         radio.setCurrentStation(0);
         radio.prevStation();
-        assertEquals(10, radio.getCurrentStation());
-
+        assertEquals(9, radio.getCurrentStation());
     }
 
     //если текущая станция > максимальной, то должна переключиться на минимальную
     @Test
     public void ifCurrentStationHigher() {
-        radio.setCurrentStation(10);
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(20);
         radio.nextStation();
         assertEquals(0, radio.getCurrentStation());
     }
@@ -84,25 +89,6 @@ class RadioTest {
     public void minStationHigherThanExpected() {
         radio.setMinStation(1);
         assertEquals(0, radio.getMinStation());
-    }
-
-    //максимальная радиостанция должна быть №10
-    @Test
-    public void maxStationMustBe10() {
-        radio.setMaxStation(15);
-        assertEquals(10, radio.getMaxStation());
-    }
-
-    @Test
-    public void maxStationLowerThanExpected() {
-        radio.setMaxStation(9);
-        assertEquals(10, radio.getMaxStation());
-    }
-
-    @Test
-    public void maxStationHigherThanExpected() {
-        radio.setMaxStation(11);
-        assertEquals(10, radio.getMaxStation());
     }
 
     @Test
@@ -180,6 +166,29 @@ class RadioTest {
         radio.setCurrentStation(7);
         radio.prevStation();
         assertEquals(6, radio.getCurrentStation());
+    }
+
+    //если текущая станция меньше минимальной, то должна переключиться на максимальную
+    @Test
+    public void switchStationToMax () {
+        radio.setCurrentStation(0);
+        radio.prevStation();
+        assertEquals(9, radio.getCurrentStation());
+    }
+
+    @Test
+    public void switchingStationToNext () {
+        radio.setCurrentStation(8);
+        radio.nextStation();
+        assertEquals(9, radio.getCurrentStation());
+    }
+
+    //если текущая станция выше максимальной, то должна переключиться на минимальную
+    @Test
+    public void switchingToMinStation () {
+        radio.setCurrentStation(9);
+        radio.nextStation();
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
